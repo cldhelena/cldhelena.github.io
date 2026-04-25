@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Helena Callado | Analytics Engineer · Revenue Operations · AI & DataOps</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #4caf7d;
+      --green-light: #5dca93;
+      --green-dark: #3a9166;
+      --bg: #0e0e0e;
+      --bg-card: #161616;
+      --bg-card2: #1c1c1c;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --text-muted: #888;
+      --text-dim: #555;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(14,14,14,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo { color: var(--green); font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--green); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      padding: 80px 5% 60px;
+      display: flex; align-items: center;
+      background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(76,175,125,0.07) 0%, transparent 70%);
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 60px;
+      width: 100%;
+    }
+    .hero-text { flex: 1; }
+    .hero-greeting { font-size: 1rem; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.05em; }
+    .hero-name {
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 800; color: var(--green);
+      line-height: 1.05; margin-bottom: 12px;
+    }
+    .hero-title { font-size: 1rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 400; }
+    .hero-tagline {
+      font-size: 1.05rem; color: var(--text);
+      font-style: italic; font-weight: 500;
+      border-left: 3px solid var(--green);
+      padding-left: 16px;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .hero-desc { color: var(--text-muted); font-size: 0.95rem; max-width: 520px; line-height: 1.7; margin-bottom: 36px; }
+    .btn-primary {
+      display: inline-block; background: var(--green); color: #fff;
+      text-decoration: none; padding: 12px 28px; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem;
+      transition: background .2s, transform .2s; margin-right: 12px;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-block; border: 1px solid var(--border); color: var(--text);
+      text-decoration: none; padding: 12px 28px; border-radius: 8px;
+      font-weight: 500; font-size: 0.95rem; transition: border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color: var(--green); color: var(--green); }
+    .btn-ghost {
+      display: inline-block; color: var(--text-muted);
+      text-decoration: none; padding: 12px 20px; border-radius: 8px;
+      font-weight: 500; font-size: 0.95rem; transition: color .2s;
+    }
+    .btn-ghost:hover { color: var(--green); }
+    .proj-events { background: linear-gradient(135deg, #0d2730 0%, #1a3d4a 100%); }
+    .hero-photo {
+      width: 260px; height: 260px; border-radius: 50%;
+      object-fit: cover; object-position: top center;
+      border: 3px solid var(--green); flex-shrink: 0;
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 80px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--green); text-transform: uppercase; margin-bottom: 8px;
+    }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 40px; color: var(--text); }
+
+    /* ─── SKILLS ─── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .skill-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px 20px;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover { border-color: var(--green); transform: translateY(-2px); }
+    .skill-icon {
+      width: 44px; height: 44px; background: rgba(76,175,125,0.1);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 14px;
+    }
+    .skill-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .skill-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .tech-tag {
+      font-size: 0.7rem; font-weight: 600;
+      background: rgba(76,175,125,0.08); border: 1px solid rgba(76,175,125,0.2);
+      color: var(--green); border-radius: 4px; padding: 2px 8px;
+    }
+
+    /* ─── ENGINEERING CARDS ─── */
+    .eng-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 24px; }
+    @media (max-width: 1040px) { .eng-grid { grid-template-columns: 1fr; } }
+    .eng-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px;
+      transition: border-color .2s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .eng-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+    }
+    .eng-card:hover { border-color: var(--green); transform: translateY(-3px); }
+    .eng-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+    .eng-card-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .eng-impact {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+      background: rgba(76,175,125,0.12); border: 1px solid rgba(76,175,125,0.3);
+      color: var(--green); border-radius: 20px; padding: 4px 12px;
+      white-space: nowrap; align-self: flex-start;
+    }
+    .eng-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+    .eng-card .stack-label { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+    .eng-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .eng-card .highlight { font-weight: 600; color: var(--text); }
+
+    /* ─── DASHBOARD PROJECTS ─── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .project-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; transition: border-color .2s, transform .2s;
+    }
+    .project-card:hover { border-color: var(--green); transform: translateY(-3px); }
+    .project-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .project-body { padding: 20px; }
+    .project-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+    .project-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+    .project-meta { font-size: 0.72rem; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+
+    /* ─── PHILOSOPHY ─── */
+    .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .philosophy-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+      transition: border-color .2s;
+    }
+    .philosophy-card:hover { border-color: var(--green); }
+    .philosophy-num {
+      font-size: 2rem; font-weight: 800; color: rgba(76,175,125,0.2);
+      line-height: 1; margin-bottom: 12px;
+    }
+    .philosophy-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+    .philosophy-card p strong { color: var(--text); font-weight: 600; }
+
+    /* ─── CURRENTLY BUILDING ─── */
+    .building-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .building-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px;
+      display: flex; gap: 14px; align-items: flex-start;
+      transition: border-color .2s;
+    }
+    .building-card:hover { border-color: var(--green); }
+    .building-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .building-card h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+    .building-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+    .building-dot {
+      display: inline-block; width: 7px; height: 7px;
+      background: var(--green); border-radius: 50%;
+      margin-right: 8px; animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .contact-links { display: flex; flex-direction: column; gap: 16px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 18px;
+      text-decoration: none; color: var(--text); transition: border-color .2s;
+    }
+    .contact-link:hover { border-color: var(--green); color: var(--green); }
+    .contact-link-icon { font-size: 1.2rem; }
+    .contact-link span { font-size: 0.88rem; }
+    .certs { display: flex; flex-direction: column; gap: 14px; }
+    .cert-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 18px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .cert-item span { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center; padding: 32px 5%;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim); font-size: 0.82rem;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .hero-inner { flex-direction: column-reverse; text-align: center; gap: 32px; }
+      .hero-photo { width: 180px; height: 180px; }
+      .hero-tagline { text-align: left; }
+      .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Helena Callado</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Stack</a></li>
+    <li><a href="#engineering">Engineering</a></li>
+    <li><a href="#dashboards">Dashboards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-greeting">Hello! My name is</p>
+      <h1 class="hero-name">Helena Callado</h1>
+      <p class="hero-title">Analytics Engineer &nbsp;·&nbsp; Revenue Operations &nbsp;·&nbsp; AI & DataOps Automation</p>
+
+      <p class="hero-tagline">
+        "I don't build dashboards. I build systems that turn data into decisions — and decisions into revenue."
+      </p>
+
+      <p class="hero-desc">
+        Analytics Engineer at <strong style="color:var(--text)">Asksuite</strong> — a global B2B SaaS platform for the hospitality sector. I own the full data stack: from pipeline architecture and data modeling to AI-powered automations that drive business outcomes across international markets. I work closely with Sales, CS, and Product teams in Latin America, North America, and Europe.
+      </p>
+
+      <a href="#engineering" class="btn-primary">View Projects</a>
+      <a href="#dashboards" class="btn-outline">Dashboard Portfolio</a>
+      <a href="#contact" class="btn-outline">Contact Me</a>
+    </div>
+
+    <img src="helena.png" alt="Helena Callado" class="hero-photo" />
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="skills" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-inner">
+    <p class="section-label">Tech Stack</p>
+    <h2 class="section-title">What I Work With</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-icon">🏗️</div>
+        <h3>Data Modeling & Engineering</h3>
+        <p>End-to-end pipeline design, from ingestion to delivery. SCD Type 2, Star Schema, ETL/ELT.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">dbt</span>
+          <span class="tech-tag">BigQuery</span>
+          <span class="tech-tag">SQL</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Database Modeling</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h3>BI & Analytics</h3>
+        <p>Self-service dashboards with correct historical modeling and revenue-focused metrics.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Power BI</span>
+          <span class="tech-tag">DAX</span>
+          <span class="tech-tag">Metabase</span>
+          <span class="tech-tag">Google Data Studio</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h3>AI & DataOps Automation</h3>
+        <p>Agentic pipelines with closed feedback loops. Systems that audit and improve themselves.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">N8N</span>
+          <span class="tech-tag">Claude</span>
+          <span class="tech-tag">Clay AI</span>
+          <span class="tech-tag">MCP</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <h3>Cloud & Warehouses</h3>
+        <p>Multi-cloud data infrastructure for scalable ingestion, storage, and transformation.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">BigQuery</span>
+          <span class="tech-tag">Snowflake</span>
+          <span class="tech-tag">Databricks</span>
+          <span class="tech-tag">GCP</span>
+          <span class="tech-tag">AWS</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🚀</div>
+        <h3>Revenue Operations</h3>
+        <p>GTM automation, funnel modeling, and pipeline analytics across international markets.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">MRR</span>
+          <span class="tech-tag">NRC</span>
+          <span class="tech-tag">Churn</span>
+          <span class="tech-tag">Funnel Metrics</span>
+          <span class="tech-tag">GTM Engineering</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ENGINEERING PROJECTS -->
+<section id="engineering">
+  <div class="section-inner">
+    <p class="section-label">Engineering & Automation</p>
+    <h2 class="section-title">Systems I've Built at Asksuite</h2>
+    <div class="eng-grid">
+
+      <div class="eng-card">
+        <div class="eng-card-header">
+          <span class="eng-card-icon">🔁</span>
+          <span class="eng-impact">5 days → 0 manual work</span>
+        </div>
+        <h3>Churn Report Automation</h3>
+        <p class="stack-label">N8N · Claude · Slack API · Google Sheets</p>
+        <p>Eliminated a 5-day manual churn classification process and replaced it with a <span class="highlight">self-improving monthly pipeline</span>. A Classifier Agent (N8N) reads diagnostic data and maps churn drivers automatically. An AI Judge (Claude) reviews outputs and auto-corrects inconsistencies before delivery to Slack every last day of the month.</p>
+        <p style="margin-top:12px;">The audit module via Claude Code calculates classification accuracy, surfaces errors, and generates a training spreadsheet — <span class="highlight">the system gets smarter with every cycle</span> without human intervention.</p>
+      </div>
+
+      <div class="eng-card">
+        <div class="eng-card-header">
+          <span class="eng-card-icon">🧩</span>
+          <span class="eng-impact">7 days → 1 day</span>
+        </div>
+        <h3>Clay AI — GTM Engineering & Demand Generation</h3>
+        <p class="stack-label">Clay AI · N8N · BigQuery · Google Sheets</p>
+        <p>Proposed and implemented Clay AI for the GTM stack. Built an <span class="highlight">end-to-end outbound workflow</span> that cut the demand generation cycle from 7 days to 1 day. Automated lead scoring and enrichment pipeline pulling firmographic and behavioral data into the CRM.</p>
+        <p style="margin-top:12px;">Implemented data governance standards across <span class="highlight">600K+ rows</span>, improving quality for global GTM teams. Dashboard adoption increased 80% after the data quality revamp.</p>
+      </div>
+
+      <div class="eng-card">
+        <div class="eng-card-header">
+          <span class="eng-card-icon">📈</span>
+          <span class="eng-impact">Vanity metrics → ROI</span>
+        </div>
+        <h3>Events Dashboard — Payback & Funnel Analysis</h3>
+        <p class="stack-label">BigQuery · Power BI · SQL · DAX</p>
+        <p>Event performance was measured in attendance and reach — with no connection to financial return. Built an <span class="highlight">end-to-end funnel</span> from attendance to pipeline to closed revenue, with payback modeling (time-to-recover-investment) for each event type and market.</p>
+        <p style="margin-top:12px;">Changed the internal conversation from surface-level engagement to sustainability and return — enabling better budget allocation across international markets.</p>
+      </div>
+
+      <div class="eng-card">
+        <div class="eng-card-header">
+          <span class="eng-card-icon">🤖</span>
+          <span class="eng-impact">20h → 10h/month audit</span>
+        </div>
+        <h3>Power BI + Claude via Microsoft MCP</h3>
+        <p class="stack-label">Power BI · Claude · Microsoft MCP · DAX · BigQuery</p>
+        <p>Integrated Claude directly into the Power BI semantic model via <span class="highlight">Microsoft MCP</span>, with business logic injected (NRC, MRR, CS funnel). Audits now surface the exact table, field, value, and business context behind any discrepancy — in natural language with a full evidence trail.</p>
+        <p style="margin-top:12px;"><span class="highlight">Board-level data audit time cut from 20+ hours to ~10 hours/month.</span> DAX measures generated from plain-language requirements.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD PORTFOLIO -->
+<section id="dashboards" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-inner">
+    <p class="section-label">BI Portfolio</p>
+    <h2 class="section-title">Dashboard Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <img src="dash-vendas.png" alt="Events Dashboard" class="project-thumb" />
+        <div class="project-body">
+          <p class="project-meta">Revenue Operations · Asksuite</p>
+          <h3>Events Dashboard — Payback & Funnel Analysis</h3>
+          <p>Most dashboards show what happened. Few show whether it was worth it. Built to answer one question: are our initiatives actually paying off? End-to-end funnel from attendance to closed revenue, payback modeling per event type and market, and a single source of truth for Product and Business teams. Shifted the conversation from "How many users attended?" to "Which events are truly sustainable?"</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="dash-financeiro.png" alt="Finance Dashboard" class="project-thumb" />
+        <div class="project-body">
+          <p class="project-meta">Finance</p>
+          <h3>Finance Dashboard</h3>
+          <p>Track cash flow over time, calculate profit margin (%), analyze expenses by category, and measure the representativeness of costs by department.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="dash-logistica.png" alt="Logistics Dashboard" class="project-thumb" />
+        <div class="project-body">
+          <p class="project-meta">Logistics</p>
+          <h3>Logistics Dashboard</h3>
+          <p>Conduct logistics network analysis (network design) with metrics to control freight costs, evaluate transportation performance, and identify the most frequently used vehicle types in operations.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="cybersec.png" alt="Cyber Security Dashboard" class="project-thumb" />
+        <div class="project-body">
+          <p class="project-meta">Cyber Security</p>
+          <h3>Cyber Security Dashboard</h3>
+          <p>Interactive dashboard for monitoring and analyzing cybersecurity threats, vulnerabilities, and security metrics in real-time.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="petshop.png" alt="Pet Shop Sales Dashboard" class="project-thumb" />
+        <div class="project-body">
+          <p class="project-meta">Retail</p>
+          <h3>Pet Shop Sales Dashboard</h3>
+          <p>Comprehensive analytics solution for petshop business intelligence, featuring sales trends, customer behavior, and inventory management.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="stock.png" alt="Cohort Dashboard" class="project-thumb" />
+        <div class="project-body">
+          <p class="project-meta">Sales Intelligence</p>
+          <h3>Sales Cohort Dashboard — Funnel Velocity</h3>
+          <p>This dashboard tells you how fast deals moving — and where they get stuck. Built around time intelligence: deal velocity by funnel stage (prospecting → qualification → proposal → close), cohort analysis by deal start date, and bottleneck identification across stale deals. Shifted the conversation from "How many deals do we have?" to "Where in the funnel are we losing momentum?"</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW I THINK ABOUT DATA -->
+<section id="philosophy">
+  <div class="section-inner">
+    <p class="section-label">Principles</p>
+    <h2 class="section-title">How I Think About Data</h2>
+    <div class="philosophy-grid">
+
+      <div class="philosophy-card">
+        <div class="philosophy-num">01</div>
+        <p><strong>Data without business context doesn't generate decisions</strong> — it generates confusion. Every model I build starts with: what will someone actually do with this?</p>
+      </div>
+
+      <div class="philosophy-card">
+        <div class="philosophy-num">02</div>
+        <p><strong>Real automation includes the feedback loop</strong> — a pipeline that runs but never improves is just deferred manual work. I build systems that audit themselves.</p>
+      </div>
+
+      <div class="philosophy-card">
+        <div class="philosophy-num">03</div>
+        <p><strong>Historical accuracy is not optional</strong> — if your data model doesn't handle organizational changes correctly, your metrics are lying to you.</p>
+      </div>
+
+      <div class="philosophy-card">
+        <div class="philosophy-num">04</div>
+        <p><strong>Frameworks fail without context</strong> — RevOps playbooks, data mesh principles, agile sprints: all useful, all wrong when applied without understanding the specific business reality.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CURRENTLY BUILDING -->
+<section id="building" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-inner">
+    <p class="section-label"><span class="building-dot"></span>Currently Building</p>
+    <h2 class="section-title">What's Next</h2>
+    <div class="building-grid">
+
+      <div class="building-card">
+        <span class="building-icon">🏗️</span>
+        <div>
+          <h3>Agentic Data Systems</h3>
+          <p>Multi-agent workflows with closed feedback loops that improve over time without human intervention.</p>
+        </div>
+      </div>
+
+      <div class="building-card">
+        <span class="building-icon">🔧</span>
+        <div>
+          <h3>ETL Pipeline Architecture</h3>
+          <p>Structured ingestion, transformation, and delivery at scale — with observability built in from day one.</p>
+        </div>
+      </div>
+
+      <div class="building-card">
+        <span class="building-icon">📚</span>
+        <div>
+          <h3>Data Engineering Depth</h3>
+          <p>Orchestration, data contracts, and pipeline observability with dbt + Snowflake.</p>
+        </div>
+      </div>
+
+      <div class="building-card">
+        <span class="building-icon">🎙️</span>
+        <div>
+          <h3>Sharing Publicly</h3>
+          <p>Technical content on RevOps + analytics engineering for the Portuguese-speaking data community.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Contact Me Today</h2>
+    <div class="contact-grid">
+
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/helena-callado-8549102b6/" target="_blank" class="contact-link">
+          <span class="contact-link-icon">💼</span>
+          <span>linkedin.com/in/helena-callado-8549102b6</span>
+        </a>
+        <a href="mailto:calladohf@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉️</span>
+          <span>calladohf@gmail.com</span>
+        </a>
+        <a href="https://helena-callado.lovable.app/" target="_blank" class="contact-link">
+          <span class="contact-link-icon">🌐</span>
+          <span>helena-callado.lovable.app</span>
+        </a>
+        <p style="font-size:0.82rem;color:var(--text-dim);margin-top:4px;padding-left:4px;">
+          Open to conversations about analytics engineering, Revenue Ops, agentic AI systems, and international GTM data strategy.
+        </p>
+      </div>
+
+      <div>
+        <p class="section-label" style="margin-bottom: 16px;">Certifications</p>
+        <div class="certs">
+          <div class="cert-item">
+            <img src="google.png" alt="Google Data Analytics Certificate" style="width:44px;height:44px;object-fit:contain;border-radius:6px;flex-shrink:0;" />
+            <span>Google Data Analytics Certificate</span>
+          </div>
+          <div class="cert-item">
+            <img src="datacamp.png" alt="Associate Data Engineer" style="width:44px;height:44px;object-fit:contain;border-radius:6px;flex-shrink:0;" />
+            <span>Associate Data Engineer — Datacamp</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Helena Callado · Analytics Engineer · Florianópolis, SC · UFSC Sistemas de Informação</p>
+</footer>
+
+</body>
+</html>
