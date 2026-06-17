@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Helena Callado | Analytics Engineer · Revenue Operations · AI & DataOps</title>
+  <title>Helena Callado | GTM Engineer · AI Automation · DataOps</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="resources/dove.png">
   <style>
@@ -159,6 +159,131 @@
     .eng-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
     .eng-card .highlight { font-weight: 600; color: var(--text); }
 
+    /* ─── CASES CAROUSEL ─── */
+    .cases-carousel {
+      position: relative;
+      overflow: hidden;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .cases-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+      cursor: grab;
+      align-items: stretch;
+    }
+    .cases-track.dragging {
+      cursor: grabbing;
+      transition: none;
+    }
+    .case-card {
+      flex: 0 0 calc(66.667% - 10px);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s;
+    }
+    .case-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+    }
+    .case-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .case-category {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .case-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.3;
+    }
+    .case-impact-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      background: rgba(76,175,125,0.12);
+      border: 1px solid rgba(76,175,125,0.3);
+      color: var(--green);
+      border-radius: 20px;
+      padding: 4px 12px;
+      white-space: nowrap;
+      align-self: flex-start;
+      flex-shrink: 0;
+    }
+    .case-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .case-block-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .case-block p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .case-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .cases-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      border: none;
+      padding: 0;
+    }
+    .dot.active {
+      background: var(--green);
+      transform: scale(1.35);
+    }
+
+    @media (max-width: 768px) {
+      .case-card { flex: 0 0 calc(88% - 10px); }
+    }
+    @media (max-width: 480px) {
+      .case-card { flex: 0 0 calc(100% - 4px); }
+    }
+
     /* ─── DASHBOARD PROJECTS ─── */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
     .project-card {
@@ -186,27 +311,6 @@
     }
     .philosophy-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
     .philosophy-card p strong { color: var(--text); font-weight: 600; }
-
-    /* ─── CURRENTLY BUILDING ─── */
-    .building-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .building-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 20px;
-      display: flex; gap: 14px; align-items: flex-start;
-      transition: border-color .2s;
-    }
-    .building-card:hover { border-color: var(--green); }
-    .building-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
-    .building-card h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; color: var(--text); }
-    .building-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
-    .building-dot {
-      display: inline-block; width: 7px; height: 7px;
-      background: var(--green); border-radius: 50%;
-      margin-right: 8px; animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
-    }
 
     /* ─── CONTACT ─── */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
@@ -254,6 +358,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Stack</a></li>
     <li><a href="#engineering">Engineering</a></li>
+    <li><a href="#cases">Cases</a></li>
     <li><a href="#dashboards">Dashboards</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -265,14 +370,14 @@
     <div class="hero-text">
       <p class="hero-greeting">Hello! My name is</p>
       <h1 class="hero-name">Helena Callado</h1>
-      <p class="hero-title">Analytics Engineer &nbsp;·&nbsp; Revenue Operations &nbsp;·&nbsp; AI & DataOps Automation</p>
+      <p class="hero-title">GTM Engineer &nbsp;·&nbsp; AI Automation &nbsp;·&nbsp; DataOps</p>
 
       <p class="hero-tagline">
-        "I don't build dashboards. I build systems that turn data into decisions — and decisions into revenue."
+        "I build the systems behind GTM — automations that run, pipelines that self-correct, and data that actually drives revenue."
       </p>
 
       <p class="hero-desc">
-        Analytics Engineer at <strong style="color:var(--text)">Asksuite</strong> — a global B2B SaaS platform for the hospitality sector. I own the full data stack: from pipeline architecture and data modeling to AI-powered automations that drive business outcomes across international markets. I work closely with Sales, CS, and Product teams in Latin America, North America, and Europe.
+        Analytics Engineer at <strong style="color:var(--text)">Asksuite</strong> — a global B2B SaaS platform for the hospitality sector. I specialize in the intersection of data engineering, AI automation, and GTM systems: building pipelines that replace manual work, agentic workflows that improve themselves, and revenue intelligence that changes how teams make decisions. I work across Latin America, North America, and Europe.
       </p>
 
       <a href="#engineering" class="btn-primary">View Projects</a>
@@ -413,6 +518,158 @@
   </div>
 </section>
 
+<!-- CASES -->
+<section id="cases">
+  <div class="section-inner">
+    <p class="section-label">Case Studies</p>
+    <h2 class="section-title">Cases That Prove It</h2>
+    <div class="cases-carousel">
+      <div class="cases-track" id="casesTrack">
+
+        <!-- Case 1 — Churn Intelligence System -->
+        <div class="case-card">
+          <div class="case-header">
+            <div>
+              <span class="case-category">AI · Agentic Automation</span>
+              <h3 class="case-title">Churn Intelligence System</h3>
+            </div>
+            <span class="case-impact-badge">5 days → 0 manual work</span>
+          </div>
+          <div class="case-body">
+            <div class="case-block">
+              <span class="case-block-label">Situation</span>
+              <p>There was no systematic process for churn classification. Every month, someone spent 5 days manually reading diagnostic data, interpreting it subjectively, and consolidating the results. The process was inconsistent between cycles and never improved.</p>
+            </div>
+            <div class="case-block">
+              <span class="case-block-label">Problem</span>
+              <p>Classifying churn drivers required human reading of raw diagnostic data, subjective interpretation, and error-prone manual consolidation. Reports arrived too late to be actionable, and accuracy didn't compound over time.</p>
+            </div>
+            <div class="case-block">
+              <span class="case-block-label">What I built</span>
+              <p>An agentic pipeline in N8N with two AI agents: a Classifier that reads diagnostic data and maps churn drivers automatically, and an AI Judge (Claude) that reviews outputs, detects inconsistencies, and auto-corrects before delivery to Slack on the last day of every month. A separate audit module via Claude Code calculates classification accuracy each cycle, surfaces errors, and generates a training spreadsheet — the system gets measurably smarter with every run, without human intervention.</p>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div class="tech-tags">
+              <span class="tech-tag">N8N</span>
+              <span class="tech-tag">Claude</span>
+              <span class="tech-tag">Slack API</span>
+              <span class="tech-tag">Google Sheets</span>
+              <span class="tech-tag">Claude Code</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case 2 — Contact Enrichment Flow -->
+        <div class="case-card">
+          <div class="case-header">
+            <div>
+              <span class="case-category">GTM Engineering · AI Automation</span>
+              <h3 class="case-title">Contact Enrichment Flow</h3>
+            </div>
+            <span class="case-impact-badge">2x leads with verified contacts</span>
+          </div>
+          <div class="case-body">
+            <div class="case-block">
+              <span class="case-block-label">Situation</span>
+              <p>The GTM team operated in a highly specific niche — traditional enrichment tools like Apollo failed to find quality contacts. The prospect list existed (companies), but finding the right person inside each company was a manual, low-yield process.</p>
+            </div>
+            <div class="case-block">
+              <span class="case-block-label">Problem</span>
+              <p>Standard enrichers couldn't navigate the niche. Finding contacts required manual research per company, with inconsistent results and no scalability. The ICP was well-defined but impossible to execute at volume.</p>
+            </div>
+            <div class="case-block">
+              <span class="case-block-label">What I built</span>
+              <p>An AI agent running Claude inside Clay that iterates over a company leads spreadsheet and autonomously scrapes reliable web sources to find contacts matching a pre-defined ICP (role, seniority, department). Each contact exits with phone, email, and LinkedIn profile. Clay feeds that data into an N8N workflow that generates a personalized briefing for each contact and triggers a custom outbound email cadence — personalised by what was found about the person, not just their title.</p>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div class="tech-tags">
+              <span class="tech-tag">Clay AI</span>
+              <span class="tech-tag">Claude</span>
+              <span class="tech-tag">N8N</span>
+              <span class="tech-tag">Google Sheets</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case 3 — GTM Automation with Clay AI -->
+        <div class="case-card">
+          <div class="case-header">
+            <div>
+              <span class="case-category">GTM Engineering · DataOps</span>
+              <h3 class="case-title">GTM Automation with Clay AI</h3>
+            </div>
+            <span class="case-impact-badge">7 days → 1 day cycle</span>
+          </div>
+          <div class="case-body">
+            <div class="case-block">
+              <span class="case-block-label">Situation</span>
+              <p>The demand generation cycle took 7 days end-to-end and depended on manual enrichment, scoring, and qualification. CRM data had no governance — 600K+ rows with inconsistent quality across three global markets. Clay AI didn't exist in the stack; it had to be proposed, justified, and implemented from scratch.</p>
+            </div>
+            <div class="case-block">
+              <span class="case-block-label">Problem</span>
+              <p>The GTM team couldn't scale outbound because lead pipelines were slow and data quality was unreliable. Without clean, enriched data, both scoring and personalization were guesswork.</p>
+            </div>
+            <div class="case-block">
+              <span class="case-block-label">What I built</span>
+              <p>Proposed and implemented Clay AI as the enrichment layer for the GTM stack. Built an end-to-end outbound workflow that automates lead scoring and enrichment — pulling firmographic and behavioral signals directly into the CRM. Implemented data governance standards across 600K+ rows to establish quality baselines for global teams.</p>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div class="tech-tags">
+              <span class="tech-tag">Clay AI</span>
+              <span class="tech-tag">N8N</span>
+              <span class="tech-tag">BigQuery</span>
+              <span class="tech-tag">Google Sheets</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case 4 — Events ROI Dashboard -->
+        <div class="case-card">
+          <div class="case-header">
+            <div>
+              <span class="case-category">Revenue Intelligence · BI Engineering</span>
+              <h3 class="case-title">Events ROI Dashboard</h3>
+            </div>
+            <span class="case-impact-badge">Vanity metrics → ROI</span>
+          </div>
+          <div class="case-body">
+            <div class="case-block">
+              <span class="case-block-label">Situation</span>
+              <p>The company ran events across multiple markets (Latin America, North America, Europe) with no financial return visibility. Performance was measured in attendance and reach — metrics that had no connection to pipeline or revenue.</p>
+            </div>
+            <div class="case-block">
+              <span class="case-block-label">Problem</span>
+              <p>There was no way to know which events generated real pipeline, which had positive payback, and which were consuming budget without return. Budget allocation was based on intuition and attendance numbers, not financial sustainability.</p>
+            </div>
+            <div class="case-block">
+              <span class="case-block-label">What I built</span>
+              <p>An end-to-end funnel model from event attendance through to closed revenue, with payback modeling (time-to-recover-investment) calculated per event type and per market. A single source of truth that lets Product and Business teams answer one question: is this event actually worth running again? Shifted the internal conversation from reach to return.</p>
+            </div>
+          </div>
+          <div class="case-footer">
+            <div class="tech-tags">
+              <span class="tech-tag">BigQuery</span>
+              <span class="tech-tag">Power BI</span>
+              <span class="tech-tag">SQL</span>
+              <span class="tech-tag">DAX</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="cases-dots" id="casesDots">
+        <button class="dot active" aria-label="Case 1"></button>
+        <button class="dot" aria-label="Case 2"></button>
+        <button class="dot" aria-label="Case 3"></button>
+        <button class="dot" aria-label="Case 4"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- DASHBOARD PORTFOLIO -->
 <section id="dashboards" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <div class="section-inner">
@@ -509,49 +766,6 @@
   </div>
 </section>
 
-<!-- CURRENTLY BUILDING -->
-<section id="building" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-  <div class="section-inner">
-    <p class="section-label"><span class="building-dot"></span>Currently Building</p>
-    <h2 class="section-title">What's Next</h2>
-    <div class="building-grid">
-
-      <div class="building-card">
-        <span class="building-icon">🏗️</span>
-        <div>
-          <h3>Agentic Data Systems</h3>
-          <p>Multi-agent workflows with closed feedback loops that improve over time without human intervention.</p>
-        </div>
-      </div>
-
-      <div class="building-card">
-        <span class="building-icon">🔧</span>
-        <div>
-          <h3>ETL Pipeline Architecture</h3>
-          <p>Structured ingestion, transformation, and delivery at scale — with observability built in from day one.</p>
-        </div>
-      </div>
-
-      <div class="building-card">
-        <span class="building-icon">📚</span>
-        <div>
-          <h3>Data Engineering Depth</h3>
-          <p>Orchestration, data contracts, and pipeline observability with dbt + Snowflake.</p>
-        </div>
-      </div>
-
-      <div class="building-card">
-        <span class="building-icon">🎙️</span>
-        <div>
-          <h3>Sharing Publicly</h3>
-          <p>Technical content on RevOps + analytics engineering for the Portuguese-speaking data community.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
@@ -599,6 +813,124 @@
 <footer>
   <p>© 2026 Helena Callado · Analytics Engineer · Florianópolis, SC · UFSC Sistemas de Informação</p>
 </footer>
+
+<script>
+(function () {
+  var track = document.getElementById('casesTrack');
+  var dotsContainer = document.getElementById('casesDots');
+  if (!track || !dotsContainer) return;
+
+  var dots = dotsContainer.querySelectorAll('.dot');
+  var cards = track.querySelectorAll('.case-card');
+  var total = cards.length;
+  var current = 0;
+
+  function getCardStep() {
+    var card = cards[0];
+    var style = getComputedStyle(track);
+    var gap = parseFloat(style.gap) || 20;
+    return card.getBoundingClientRect().width + gap;
+  }
+
+  function goTo(index) {
+    current = Math.max(0, Math.min(index, total - 1));
+    track.style.transform = 'translateX(-' + (current * getCardStep()) + 'px)';
+    dots.forEach(function (d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () { goTo(i); });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    var section = document.getElementById('cases');
+    var rect = section.getBoundingClientRect();
+    var inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!inView) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+  });
+
+  var dragStart = 0;
+  var dragStartTranslate = 0;
+  var isDragging = false;
+  var dragDelta = 0;
+
+  function currentTranslate() {
+    var t = track.style.transform;
+    if (!t) return 0;
+    var m = t.match(/translateX\((-?[\d.]+)px\)/);
+    return m ? parseFloat(m[1]) : 0;
+  }
+
+  function startDrag(x) {
+    isDragging = true;
+    dragStart = x;
+    dragDelta = 0;
+    dragStartTranslate = currentTranslate();
+    track.classList.add('dragging');
+  }
+
+  function moveDrag(x) {
+    if (!isDragging) return;
+    dragDelta = x - dragStart;
+    track.style.transform = 'translateX(' + (dragStartTranslate + dragDelta) + 'px)';
+  }
+
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    track.classList.remove('dragging');
+    if (Math.abs(dragDelta) > 48) {
+      goTo(dragDelta < 0 ? current + 1 : current - 1);
+    } else {
+      goTo(current);
+    }
+    dragDelta = 0;
+  }
+
+  track.addEventListener('mousedown', function (e) {
+    e.preventDefault();
+    startDrag(e.clientX);
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (isDragging) moveDrag(e.clientX);
+  });
+  window.addEventListener('mouseup', function () {
+    endDrag();
+  });
+
+  var touchStartY = 0;
+  var isVertical = false;
+
+  track.addEventListener('touchstart', function (e) {
+    touchStartY = e.touches[0].clientY;
+    isVertical = false;
+    startDrag(e.touches[0].clientX);
+  }, { passive: true });
+
+  track.addEventListener('touchmove', function (e) {
+    if (!isDragging) return;
+    var dx = Math.abs(e.touches[0].clientX - dragStart);
+    var dy = Math.abs(e.touches[0].clientY - touchStartY);
+    if (!isVertical && dy > dx + 5) {
+      isVertical = true;
+      endDrag();
+      return;
+    }
+    if (!isVertical) moveDrag(e.touches[0].clientX);
+  }, { passive: true });
+
+  track.addEventListener('touchend', function (e) {
+    if (!isVertical) endDrag();
+    else isDragging = false;
+  }, { passive: true });
+
+  window.addEventListener('resize', function () { goTo(current); });
+})();
+</script>
 
 </body>
 </html>
